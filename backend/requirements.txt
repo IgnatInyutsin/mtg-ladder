@@ -1,0 +1,6 @@
+Django>=4.0
+djangorestframework
+psycopg2
+tzdata
+django-cors-headers
+django-request-logging
