@@ -52,9 +52,8 @@ jobs:
         pip install -r backend/requirements.txt
     - name: Create logs files
       run: |
-        cd backend/restapi/logs
-        touch django.log
-        touch request.log
+        touch backend/restapi/django.log
+        touch backend/restapi/request.log
     - name: Migrate
       run: |
         python backend/manage.py migrate
