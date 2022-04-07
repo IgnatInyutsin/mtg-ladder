@@ -1,0 +1,8 @@
+.my-header-background {
+  background-color: #282828;
+}
+.navbar {
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}

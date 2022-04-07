@@ -1,4 +1,4 @@
 #!/bin/bash
-cd ../docker/sugar-clicker_instances/
-docker-compose exec backend python manage.py makemigrations rest-api
+cd ../docker/mtg-ladder_instances/
+docker-compose exec backend python manage.py makemigrations restapi
 docker-compose exec backend python manage.py migrate

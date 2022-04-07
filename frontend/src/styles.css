@@ -1,1 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+/*Убрать полосу прокрутки для всей страницы*/
+::-webkit-scrollbar {
+  width: 0;
+}
+
+.navbar {
+  position: fixed;
+}
+.col {
+  height: calc(100vh - 60px);
+  overflow: auto;
+}
+.col-left {
+  margin-right: 2%;
+}
+.col-right {
+  margin-left: 2%;
+}
+.row {
+  height: 100vh;
+  overflow: hidden;
+}
+.card {
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 900px) {
+  .col {
+    height: auto;
+    width: 98%;
+    margin: 0 0 20px 0;
+  }
+  .adaptive {
+    justify-content: center;
+    flex-direction: column;
+    height: auto;
+  }
+  body {
+    overflow: auto;
+  }
+}
