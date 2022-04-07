@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.core.mail',
+
     'rest_framework',
     'corsheaders',
+    'multiselectfield',
+    'requests',
 
     'restapi',
 ]
