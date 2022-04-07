@@ -9,4 +9,4 @@ class LoadCardDatabaseTest(TestCase):
         # Проверяем количество карт
         self.assertEqual(len(Card.objects.all()) > 8900, True)
         # Проверяем количество правил
-        self.assertEqual(len(CardRule.objects.all()) > 15000, True)
+        self.assertEqual(len( CardRule.objects.all() ) > 15000, True)
