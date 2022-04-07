@@ -66,43 +66,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'restapi.urls'
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'simple': {
-            'format': '{asctime} | {levelname} | {module} | {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'request_file': {
-            'level': os.environ.get("DJANGO_REQUEST_LOGGING_LEVEL"),
-            'class': 'logging.FileHandler',
-            'filename': 'restapi/logs/request.log',
-            'formatter': 'simple'
-        },
-        'django_file': {
-            'level': os.environ.get("DJANGO_LOGGING_LEVEL"),
-            'class': 'logging.FileHandler',
-            'filename': 'restapi/logs/django.log',
-            'formatter': 'simple'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['request_file'],
-            'level': os.environ.get("DJANGO_REQUEST_LOGGING_LEVEL"),
-            'propagate': False,
-        },
-        'django': {
-            'handlers': ['django_file'],
-            'level': os.environ.get("DJANGO_LOGGING_LEVEL"),
-            'propagate': True,
-        }
-    },
-}
-
 WSGI_APPLICATION = 'restapi.wsgi.application'
 
 TEMPLATES = [
