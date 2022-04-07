@@ -1,3 +1,3 @@
 #!/bin/bash
-cd ../docker/sugar-clicker_instances/
+cd ../docker/mtg-ladder_instances/
 docker-compose exec backend bash
