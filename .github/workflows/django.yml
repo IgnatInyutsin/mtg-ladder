@@ -2,11 +2,13 @@ name: Backend CI
 
 on:
   push:
-    branches: [ main, ignat ]
-    paths: [ backend/* ]
+    branches: 
+      - main
+      - 'backend/*'
   pull_request:
-    branches: [ main ]
-    paths: [ backend/* ]
+    branches: 
+      - main 
+      - 'backend/*'
 
 jobs:
   build:
