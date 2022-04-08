@@ -4,5 +4,5 @@ from django.urls import include, path
 # Additionally, we include login URLs for the browsable API.
 
 urlpatterns = [
-    path('card/', include('restapi.app.cards.routes')),
+    path('cards/', include('restapi.app.cards.routes')),
 ]
