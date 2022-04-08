@@ -58,6 +58,7 @@ class Card(models.Model):
     power = models.CharField(max_length=256, blank=True, null=True)
     toughness = models.CharField(max_length=256, blank=True, null=True)
     loyalty = models.CharField(max_length=256, blank=True, null=True)
+    scryfall_id = models.CharField(max_length=256)
 
     def __str__(self):
         return  self.name

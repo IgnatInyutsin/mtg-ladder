@@ -22,4 +22,5 @@ class CardSerializer(serializers.HyperlinkedModelSerializer):
                   'power',
                   'toughness',
                   'loyalty',
-                  'rules']
+                  'rules',
+                  'scryfall_id']
