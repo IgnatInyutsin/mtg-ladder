@@ -42,7 +42,8 @@ class Command(BaseCommand):
                 types=response[card][0].get("types"),
                 power=response[card][0].get("power", None),
                 toughness=response[card][0].get("toughness", None),
-                loyalty=response[card][0].get("loyalty", None)
+                loyalty=response[card][0].get("loyalty", None),
+                scryfall_id=response[card][0].get("identifiers").get("scryfallOracleId")
             )
             card_orm.save()
 
@@ -60,4 +61,4 @@ class Command(BaseCommand):
 
 
         print('Loading finished!')
-        return True
+        return "End."
