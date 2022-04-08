@@ -1,0 +1,220 @@
+get:
+  summary: Список карт
+  description: Отдает список карт по заданным параметрам
+  parameters:
+    - in: query
+      name: "name"
+      schema:
+        type: string
+      description: Часть имени для поиска
+      required: false
+    - in: query
+      name: "text"
+      schema:
+        type: string
+      description: Часть текста на карте для поиска
+      required: false
+    - in: query
+      name: mana_value_min
+      schema:
+        type: integer
+      description: Минимальная мана стоимость
+      required: false
+    - in: query
+      name: mana_value_max
+      schema:
+        type: integer
+      description: Максимальная мана стоимость
+      required: false
+    - in: query
+      name: "colors"
+      schema:
+        type: array
+        items:
+          type: string
+          description: Цвет карты, обозначенный одной буквой
+          example:
+              - W
+              - U
+              - B
+              - R
+              - G
+      required: false
+      description: Массив цветов, которые должны присутствовать у карт в ответе
+    - in: query
+      name: "types"
+      schema:
+        type: array
+        items:
+          type: string
+          description: Тип карты
+          example:
+            - "Artifact"
+            - "Card"
+            - "Conspiracy"
+            - "Creature"
+            - "Dragon"
+            - "Dungeon"
+            - "Eaturecray"
+            - "Elemental"
+            - "Elite"
+            - "Emblem"
+            - "Enchantment"
+            - "Ever"
+            - "Goblin"
+            - "Hero"
+            - "Instant"
+            - "Jaguar"
+            - "Knights"
+            - "Land"
+            - "Phenomenon"
+            - "Plane"
+            - "Planeswalker"
+            - "Scariest"
+            - "Scheme"
+            - "See"
+            - "Sorcery"
+            - "Specter"
+            - "Summon"
+            - "Token"
+            - "Tribal"
+            - "Vanguard"
+            - "Wolf"
+            - "You’ll"
+            - "instant"
+      description: Массив из типов карт, которые должны присутствовать у карт в ответе
+      required: false
+
+
+  tags:
+    - card
+
+  responses:
+
+    "200":
+      description: Список карт успешно получен
+      content:
+        application/json:
+          schema:
+            type: object
+            description: Объект ответа
+            required:
+              - count
+              - next
+              - previous
+              - results
+            properties:
+              count:
+                description: Общее количество объектов по этому запросу
+                type: number
+                example: 8937
+              next:
+                description: Ссылка на следующую страницу
+                type: string
+                example: http://localhost:82/api/cards/?page=3
+              previous:
+                description: Ссылка на предыдущую страницу
+                type: string
+                example: http://localhost:82/api/cards/?page=1
+              results:
+                description: Массив из объектов карт
+                type: array
+                items:
+                  type: object
+                  description: Объект карты
+                  required:
+                    - id
+                    - name
+                    - text
+                    - mana_value
+                    - mana_cost
+                    - colors
+                    - types
+                    - power
+                    - toughness
+                    - loyalty
+                    - rules
+                  properties:
+                    id:
+                      description: ID карты
+                      type: number
+                      example: 8963
+                    name:
+                      description: Название карты на русском, в случае отсутствия перевода - на английском
+                      type: string
+                      example: Рунная Метка Абзана"
+                    text:
+                      description: Текст карты на русском, в случае отсутствия перевода - на английском. При отстуствии текста - null
+                      type: string
+                      example: Зачаровать существо\nЗачарованное существо получает +2/+2.\nЗачарованное существо имеет Бдительность, пока вы контролируете черный или зеленый перманент.
+                    mana_value:
+                      description: Стоимость карты в мане.
+                      type: number
+                      example:
+                        3
+                    mana_cost:
+                      description: Символьное обозначение конвертированной мана-стоимости. При отсутствии - null
+                      type: string
+                      example: "{2}{W}"
+                    colors:
+                      description: Цвета карты, обозначенные одной буквой
+                      type: array
+                      items:
+                        description: Цвет, обозначенный одной буквой.
+                        type: string
+                        example:
+                          - W
+                          - B
+                          - U
+                          - R
+                          - G
+                    types:
+                      description: Типы карты, если у карты один тип, то передает строку
+                      type: array
+                      items:
+                        description: Тип карты
+                        type: string
+                        example:
+                          - "Artifact"
+                          - "Card"
+                          - "Conspiracy"
+                          - "Creature"
+                          - "Dragon"
+                          - "Dungeon"
+                          - "Eaturecray"
+                          - "Elemental"
+                          - "Elite"
+                          - "Emblem"
+                          - "Enchantment"
+                          - "Ever"
+                          - "Goblin"
+                          - "Hero"
+                          - "Instant"
+                          - "Jaguar"
+                          - "Knights"
+                          - "Land"
+                          - "Phenomenon"
+                          - "Plane"
+                          - "Planeswalker"
+                          - "Scariest"
+                          - "Scheme"
+                          - "See"
+                          - "Sorcery"
+                          - "Specter"
+                          - "Summon"
+                          - "Token"
+                          - "Tribal"
+                          - "Vanguard"
+                          - "Wolf"
+                          - "You’ll"
+                          - "instant"
+                    power:
+                      type: string
+                      description: Присутствует, если карта имеет тип существа или является машиной. Обозначает силу этой карты. При отсутствии - null
+                      example: 3
+                    toughness:
+                      type: string
+                      description: Присутствует, если карта имеет тип существа или является машиной. Обозначает выносливость. При отсутствии - null
+                    loyalty:
+                      type: string
+                      description: Присутствует, если карта имеет тип Planeswalker. Обозначает очки лояльности мироходца. При отсутствии - null
