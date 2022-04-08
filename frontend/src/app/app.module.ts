@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
+import { PreloaderComponent } from './preloader/preloader.component';
 
 // определение маршрутов
 const appRoutes: Routes =[
@@ -23,6 +24,7 @@ const appRoutes: Routes =[
     HomeComponent,
     RegistrationComponent,
     LoginComponent,
+    PreloaderComponent,
   ],
   imports: [
     BrowserModule,

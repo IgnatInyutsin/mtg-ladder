@@ -1,4 +1,9 @@
-  <app-header></app-header>
-  <div class="body-wrap">
-    <router-outlet></router-outlet>
-  </div>
+<app-header>
+  <app-preloader></app-preloader>
+</app-header>
+
+<div class="body-wrap">
+  <router-outlet>
+    <app-preloader></app-preloader>
+  </router-outlet>
+</div>
