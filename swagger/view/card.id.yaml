@@ -20,12 +20,13 @@ get:
             description: Объект карты
             required:
               - id
+              - scryfall_id
               - name
               - text
-              - mana_value
-              - mana_cost
               - colors
               - types
+              - mana_value
+              - mana_cost
               - power
               - toughness
               - loyalty
@@ -111,9 +112,15 @@ get:
               toughness:
                 type: string
                 description: Присутствует, если карта имеет тип существа или является машиной. Обозначает выносливость. При отсутствии - null
+                example: 3
               loyalty:
                 type: string
                 description: Присутствует, если карта имеет тип Planeswalker. Обозначает очки лояльности мироходца. При отсутствии - null
+                example: 3
+              scryfall_id:
+                type: string
+                description: ScryfallOracleId карты
+                example: d85ea576-a794-44bf-b405-1f1c49477409
     "404":
       description: Карта успешно получена
       content:
