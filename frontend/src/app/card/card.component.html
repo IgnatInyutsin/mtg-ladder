@@ -1,0 +1,20 @@
+<div class="card w-100" style="max-width: 400px; margin-right: 20px; margin-bottom: 20px">
+  <div *ngIf="!manyFaces">
+    <img [src]="imgUrl" class="card-img-top" alt="...">
+  </div>
+  <div *ngIf="manyFaces">
+    <img [src]="imgUrl" class="card-img-top w-50" alt="...">
+    <img [src]="secondImgUrl" class="card-img-top w-50" alt="...">
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{name}}</h5>
+    <div class="card-text">
+      <div>{{text}}</div>
+      <br>
+      <div *ngIf="manyFaces">{{secondText}}</div>
+      <span class="badge bg-primary" style="margin-right: 20px">{{tixPrice}} TIX</span>
+      <span class="badge bg-secondary" style="margin-right: 20px">{{eurPrice}} EUR</span>
+      <span class="badge bg-success">{{usdPrice}} USD</span>
+    </div>
+  </div>
+</div>

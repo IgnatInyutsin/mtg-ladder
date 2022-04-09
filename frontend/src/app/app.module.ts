@@ -9,13 +9,18 @@ import { HomeComponent } from './home/home.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { PreloaderComponent } from './preloader/preloader.component';
+import { CardsComponent } from './cards/cards.component';
+import { HttpClientModule }   from '@angular/common/http';
+import { CardComponent } from './card/card.component';
 
 // определение маршрутов
 const appRoutes: Routes =[
   { path: '', component: HomeComponent},
   { path: 'registration', component: RegistrationComponent},
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent},
+  { path: 'cards', component: CardsComponent},
 ];
+
 
 @NgModule({
   declarations: [
@@ -25,11 +30,14 @@ const appRoutes: Routes =[
     RegistrationComponent,
     LoginComponent,
     PreloaderComponent,
+    CardsComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
