@@ -64,11 +64,11 @@ export class CardsComponent implements OnInit {
         // если карточка односторонняя
         if (response.data[0].card_faces == undefined) {
           data.results[i].manyFaces = false;
-          data.results[i].imgUrl = response.data[0].image_uris.png;
+          data.results[i].imgUrl = response.data[0].image_uris.normal;
         } else { // иначе добавляем второй текст и картинки
           data.results[i].manyFaces = true;
-          data.results[i].imgUrl = response.data[0].card_faces[0].image_uris.png;
-          data.results[i].secondImgUrl = response.data[0].card_faces[1].image_uris.png;
+          data.results[i].imgUrl = response.data[0].card_faces[0].image_uris.normal;
+          data.results[i].secondImgUrl = response.data[0].card_faces[1].image_uris.normal;
           data.results[i].secondText = response.data[0].card_faces[1].oracle_text;
         }
         // заполнение полей с ценами
