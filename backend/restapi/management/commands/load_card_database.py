@@ -17,16 +17,18 @@ class Command(BaseCommand):
         # собираем данные о картах
         response = json.loads(requests.get('https://mtgjson.com/api/v5/PioneerAtomic.json').text).get("data")
 
+
         # перебираем все карты
         for card in response:
+            english_name = card
+            english_text = response.get("text", None)
             # подбираем русский язык
             for localy in response[card][0].get("foreignData", []):
-                if localy.get("language") != "Russian":
-                    continue
-                # забираем имя и текст
-                name = localy.get("name")
-                text = localy.get("text", None)
-                break
+                if localy.get("language") == "Russian":
+                    # забираем имя и текст
+                    name = localy.get("name")
+                    text = localy.get("text", None)
+                    break
             else:
                 # если нет русского - делаем названия на английском
                 name = response[card][0].get("name")
@@ -43,7 +45,9 @@ class Command(BaseCommand):
                 power=response[card][0].get("power", None),
                 toughness=response[card][0].get("toughness", None),
                 loyalty=response[card][0].get("loyalty", None),
-                scryfall_id=response[card][0].get("identifiers").get("scryfallOracleId")
+                scryfall_id=response[card][0].get("identifiers").get("scryfallOracleId"),
+                english_name=english_name,
+                english_text=english_text,
             )
             card_orm.save()
 

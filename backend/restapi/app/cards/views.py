@@ -12,10 +12,12 @@ class CardsViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = self.queryset
         # фильтр по имени
         if "name" in self.request.query_params:
-            queryset = queryset.filter(name__icontains=self.request.query_params.get("name"))
+            queryset = queryset.filter(Q(name__icontains=self.request.query_params.get("name")) |
+                                       Q(english_name__icontains=self.request.query_params.get("name")))
         # фильтр по тексту
         if "text" in self.request.query_params:
-            queryset = queryset.filter(text__icontains=self.request.query_params.get("text"))
+            queryset = queryset.filter(Q(text__icontains=self.request.query_params.get("text")) |
+                                       Q(english_text__icontains=self.request.query_params.get("text")))
         # фильтр по минимальной мана-стоимости
         if "mana_value_min" in self.request.query_params:
             try:
