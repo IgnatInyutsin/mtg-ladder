@@ -65,7 +65,11 @@ export class CardsComponent implements OnInit {
     // страница +1
     this.actualPage += 1;
     // сбор карт с актуальной страницы
-    this.http.get(this.cardsPull.next).subscribe((data:any) => {
+    this.http.get(this.rest.restapiUrl + "cards/", {params:
+        {
+          page: this.actualPage
+        }
+    }).subscribe((data:any) => {
       // отключаем сообщение с ошибкой
       this.ERROR_MESSAGE_404 = false;
       // сбор данных с scryfall api
@@ -78,7 +82,13 @@ export class CardsComponent implements OnInit {
     window.scrollTo(0, 0);
     // страница -1
     this.actualPage -= 1;
-    this.http.get(this.cardsPull.previous).subscribe((data:any) => {
+    // сбор карт с актуальной страницы
+    this.http.get(this.rest.restapiUrl + "cards/", {
+      params:
+        {
+          page: this.actualPage
+        }
+    }).subscribe((data:any) => {
       // отключаем сообщение с ошибкой
       this.ERROR_MESSAGE_404 = false;
       // сбор данных с scryfall api
@@ -90,7 +100,13 @@ export class CardsComponent implements OnInit {
     // собираем данные из формы
     this.actualPage = this.myPage;
     window.scrollTo(0, 0);
-    this.http.get(this.rest.restapiUrl + "cards/?page=" + this.actualPage).subscribe((data:any) => {
+    // сбор карт с актуальной страницы
+    this.http.get(this.rest.restapiUrl + "cards/", {
+      params:
+        {
+          page: this.actualPage
+        }
+    }).subscribe((data:any) => {
       // отключаем сообщение с ошибкой
       this.ERROR_MESSAGE_404 = false;
       // собираем данные со scryfallapi
