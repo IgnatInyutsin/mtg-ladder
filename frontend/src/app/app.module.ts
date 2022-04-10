@@ -13,7 +13,6 @@ import { CardsComponent } from './cards/cards.component';
 import { HttpClientModule }   from '@angular/common/http';
 import { CardComponent } from './card/card.component';
 import {CardTextPipe} from "./card-text.pipe";
-import {ManaSymbolsPipe} from "./mana-symbols.pipe";
 
 // определение маршрутов
 const appRoutes: Routes =[
@@ -35,7 +34,6 @@ const appRoutes: Routes =[
     CardsComponent,
     CardComponent,
     CardTextPipe,
-    ManaSymbolsPipe
   ],
   imports: [
     BrowserModule,

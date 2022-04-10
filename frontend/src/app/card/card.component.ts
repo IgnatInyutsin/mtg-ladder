@@ -17,7 +17,7 @@ export class CardComponent implements OnInit {
   @Input() secondImgUrl: string = '';
   @Input() secondText: string = '';
   @Input() types: string | string[] = [];
-  @Input() colors: string[] = [];
+  @Input() manaCost: string | undefined = "";
 
   constructor() { }
 

@@ -116,7 +116,7 @@
                   [tixPrice]="card.tixPrice"
                   [manyFaces]="card.manyFaces"
                   [types]="card.types"
-                  [colors]="card.colors"></app-card>
+                  [manaCost]="card.mana_cost"></app-card>
       </div>
       <div *ngIf="card.manyFaces">
         <app-card [name]="card.name"
@@ -129,7 +129,7 @@
                   [secondImgUrl]="card.secondImgUrl"
                   [secondText]="card.secondText"
                   [types]="card.types"
-                  [colors]="card.colors"></app-card>
+                  [manaCost]="card.mana_cost"></app-card>
       </div>
     </div>
   </div>

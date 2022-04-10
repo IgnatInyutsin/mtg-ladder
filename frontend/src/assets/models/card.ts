@@ -9,7 +9,7 @@ export class CardObject {
               public colors:[],
               public types:[] | string,
               public mana_value:number | undefined,
-              public mana_cost:number | undefined,
+              public mana_cost:string = "",
               public power:string = '',
               public toughness:string = '',
               public loyalty:string = '',

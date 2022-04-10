@@ -9,7 +9,7 @@
   <div class="card-body">
     <h5 class="card-title">{{name}}</h5>
     <div class="card-text">
-      <div [innerHTML]="(colors | mana_symbols) | card_text"></div>
+      <div [innerHTML]="manaCost | card_text"></div>
       <small class="text-secondary">{{types}}</small>
       <div [innerHTML]="text | card_text"></div>
       <br>
