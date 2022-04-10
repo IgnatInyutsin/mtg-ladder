@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { RestApiConnector } from '../../assets/connectors/restapi';
 import {PageResponseObject} from "../../assets/models/page_response";
 import { map, catchError } from "rxjs/operators";
@@ -10,13 +10,37 @@ import { map, catchError } from "rxjs/operators";
   styleUrls: ['./cards.component.css']
 })
 export class CardsComponent implements OnInit {
+
   rest: RestApiConnector = new RestApiConnector();
   cardsPull: PageResponseObject = new PageResponseObject(0, "", "", []);
-  actualPage: number = 1
+  actualPage: number = 1;
   previousPage: boolean = false
   nextPage: boolean = true
   myPage: number = 1
   ERROR_MESSAGE_404: boolean = false
+
+  form = {
+    name: "",
+    text: "",
+    mana_value_min: null,
+    mana_value_max: null,
+    types: {
+      Artifact: false,
+      Land: false,
+      Creature: false,
+      Enchantment: false,
+      Instant: false,
+      Sorcery: false,
+      Planeswalker: false
+    },
+    colors: {
+      B: false,
+      W: false,
+      U: false,
+      R: false,
+      G: false
+    }
+  }
 
   constructor(private http: HttpClient) {
   }
@@ -40,11 +64,11 @@ export class CardsComponent implements OnInit {
         // если карточка односторонняя
         if (response.data[0].card_faces == undefined) {
           data.results[i].manyFaces = false;
-          data.results[i].imgUrl = response.data[0].image_uris.png;
+          data.results[i].imgUrl = response.data[0].image_uris.normal;
         } else { // иначе добавляем второй текст и картинки
           data.results[i].manyFaces = true;
-          data.results[i].imgUrl = response.data[0].card_faces[0].image_uris.png;
-          data.results[i].secondImgUrl = response.data[0].card_faces[1].image_uris.png;
+          data.results[i].imgUrl = response.data[0].card_faces[0].image_uris.normal;
+          data.results[i].secondImgUrl = response.data[0].card_faces[1].image_uris.normal;
           data.results[i].secondText = response.data[0].card_faces[1].oracle_text;
         }
         // заполнение полей с ценами
@@ -66,14 +90,17 @@ export class CardsComponent implements OnInit {
     this.actualPage += 1;
     // сбор карт с актуальной страницы
     this.http.get(this.rest.restapiUrl + "cards/", {params:
-        {
-          page: this.actualPage
-        }
+        this.getQueryParams()
     }).subscribe((data:any) => {
-      // отключаем сообщение с ошибкой
-      this.ERROR_MESSAGE_404 = false;
-      // сбор данных с scryfall api
-      this.cardsPull = this.getImageAndPrices(data);
+      if (data.results.length != 0) {
+        // отключаем сообщение с ошибкой
+        this.ERROR_MESSAGE_404 = false;
+        // собираем данные со scryfallapi
+        this.cardsPull = this.getImageAndPrices(data);
+      } else {
+        this.cardsPull.results = []
+        this.ERROR_MESSAGE_404 = true;
+      }
     });
   }
 
@@ -84,15 +111,17 @@ export class CardsComponent implements OnInit {
     this.actualPage -= 1;
     // сбор карт с актуальной страницы
     this.http.get(this.rest.restapiUrl + "cards/", {
-      params:
-        {
-          page: this.actualPage
-        }
+      params: this.getQueryParams()
     }).subscribe((data:any) => {
-      // отключаем сообщение с ошибкой
-      this.ERROR_MESSAGE_404 = false;
-      // сбор данных с scryfall api
-      this.cardsPull = this.getImageAndPrices(data);
+      if (data.results.length != 0) {
+        // отключаем сообщение с ошибкой
+        this.ERROR_MESSAGE_404 = false;
+        // собираем данные со scryfallapi
+        this.cardsPull = this.getImageAndPrices(data);
+      } else {
+        this.cardsPull.results = []
+        this.ERROR_MESSAGE_404 = true;
+      }
     });
   }
 
@@ -102,15 +131,17 @@ export class CardsComponent implements OnInit {
     window.scrollTo(0, 0);
     // сбор карт с актуальной страницы
     this.http.get(this.rest.restapiUrl + "cards/", {
-      params:
-        {
-          page: this.actualPage
-        }
+      params: this.getQueryParams()
     }).subscribe((data:any) => {
-      // отключаем сообщение с ошибкой
-      this.ERROR_MESSAGE_404 = false;
-      // собираем данные со scryfallapi
-      this.cardsPull = this.getImageAndPrices(data);
+      if (data.results.length != 0) {
+        // отключаем сообщение с ошибкой
+        this.ERROR_MESSAGE_404 = false;
+        // собираем данные со scryfallapi
+        this.cardsPull = this.getImageAndPrices(data);
+      } else {
+        this.cardsPull.results = []
+        this.ERROR_MESSAGE_404 = true;
+      }
     }, error => { // обработка ошибок
       if (error.status == 404) { // если такой страницы нет - сообщение с ошибкой
         this.cardsPull.results = []
@@ -119,5 +150,60 @@ export class CardsComponent implements OnInit {
         this.nextPage = false;
       }
     });
+  }
+
+  // сброс настроек мана стоимости
+  setDefaultManaValue() : void {
+    this.form.mana_value_max = null;
+    this.form.mana_value_min = null;
+  }
+
+  search () : void {
+    window.scrollTo(0, 0);
+    // сбор карт с актуальной страницы
+    this.http.get(this.rest.restapiUrl + "cards/", {
+      params: this.getQueryParams()
+    }).subscribe((data:any) => {
+      console.log(data.results)
+      if (data.results.length != 0) {
+        // отключаем сообщение с ошибкой
+        this.ERROR_MESSAGE_404 = false;
+        // собираем данные со scryfallapi
+        this.cardsPull = this.getImageAndPrices(data);
+      } else {
+        this.cardsPull.results = []
+        this.ERROR_MESSAGE_404 = true;
+      }
+    });
+  }
+
+  // взять строку для get запроса
+  getQueryParams () : any {
+      // собираем выбранные цвета
+      let colors = new Array<String>();
+      if (this.form.colors.G) colors.push("G")
+      if (this.form.colors.R) colors.push("R")
+      if (this.form.colors.B) colors.push("B")
+      if (this.form.colors.W) colors.push("W")
+      if (this.form.colors.U) colors.push("U")
+
+      // собираем выбранные типы
+      let types = new Array<String>();
+      if (this.form.types.Instant) types.push("Instant")
+      if (this.form.types.Sorcery) types.push("Sorcery")
+      if (this.form.types.Creature) types.push("Creature")
+      if (this.form.types.Artifact) types.push("Artifact")
+      if (this.form.types.Planeswalker) types.push("Planeswalker")
+      if (this.form.types.Land) types.push("Land")
+      if (this.form.types.Enchantment) types.push("Enchantment")
+
+      // возвращаем параметры строки
+      return {
+        page: this.actualPage,
+        name: this.form.name,
+        text: this.form.text,
+        colors: colors,
+        types: types
+      }
   }
 }

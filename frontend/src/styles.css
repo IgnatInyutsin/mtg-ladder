@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 /*Убрать полосу прокрутки для всей страницы*/
 ::-webkit-scrollbar {
   width: 0;
