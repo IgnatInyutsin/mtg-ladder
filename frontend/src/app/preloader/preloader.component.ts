@@ -16,6 +16,7 @@ export class PreloaderComponent implements OnInit {
 
   @HostListener('window:load',['$event'])
   onPageLoad(event: Event) {
+    document.body.style.overflow = "auto"
     this.loaded = true;
   }
 
