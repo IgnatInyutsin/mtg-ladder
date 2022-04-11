@@ -160,6 +160,7 @@ export class CardsComponent implements OnInit {
 
   search () : void {
     window.scrollTo(0, 0);
+    this.actualPage = 1;
     // сбор карт с актуальной страницы
     this.http.get(this.rest.restapiUrl + "cards/", {
       params: this.getQueryParams()
