@@ -1,14 +1,8 @@
 from rest_framework import serializers
 from restapi.app.cards.models import *
 
-class CardRuleSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = CardRule
-        fields = ["id", "date", "text"]
-
 # Сериализатор для GET
 class CardSerializer(serializers.HyperlinkedModelSerializer):
-    rules = CardRuleSerializer(many=True)
     class Meta:
         model = Card
         fields = ['id',
@@ -25,6 +19,4 @@ class CardSerializer(serializers.HyperlinkedModelSerializer):
 
                   'power',
                   'toughness',
-                  'loyalty',
-
-                  'rules']
+                  'loyalty']

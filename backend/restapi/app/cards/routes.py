@@ -1,9 +1,11 @@
 from django.urls import include, path
 from rest_framework import routers
 from restapi.app.cards.views import CardsViewSet
+from restapi.app.cards.rules.views import CardRuleViewSet
 
 #устанавливаем пути
 router = routers.DefaultRouter()
+router.register(r'(?P<cardId>[0-9]+)/rules', CardRuleViewSet)
 router.register('', CardsViewSet)
 
 # Wire up our API using automatic URL routing.
