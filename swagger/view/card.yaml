@@ -223,3 +223,15 @@ get:
                       type: string
                       description: ScryfallOracleId карты
                       example: d85ea576-a794-44bf-b405-1f1c49477409
+    "404":
+      description: Такой страницы не существует
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - detail
+            properties:
+              detail:
+                type: string
+                example: Invalid page.

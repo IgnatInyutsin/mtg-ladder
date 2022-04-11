@@ -122,7 +122,7 @@ get:
                 description: ScryfallOracleId карты
                 example: d85ea576-a794-44bf-b405-1f1c49477409
     "404":
-      description: Карта успешно получена
+      description: Не существует карты с данным ID
       content:
         application/json:
           schema:
