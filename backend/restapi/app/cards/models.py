@@ -40,14 +40,6 @@ TYPES = (("Artifact", "Artifact"),
                                         ("You’ll", "You’ll"),
                                          ("instant", "instant"))
 
-class CardRule(models.Model):
-    date = models.DateField()
-    text = models.TextField()
-    card = models.ForeignKey('Card',  on_delete=models.CASCADE, related_name="rules")
-
-    def __str__(self):
-        return self.card.name + " " + self.date.isoformat()
-
 class Card(models.Model):
     name = models.TextField()
     mana_value = models.IntegerField(blank=True, null=True)

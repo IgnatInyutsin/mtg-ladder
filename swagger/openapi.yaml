@@ -1,8 +1,8 @@
 openapi: "3.0.0"
 
 info:
-  title: Пример документации
-  description: Описание примера документации
+  title: MTG-ladder-API
+  description: "API по взаимодействию с базой карт и аккаунтами MTG-LADDER"
   version: "1.0"
 
 servers:
@@ -17,6 +17,8 @@ tags:
 
 paths:
   /cards/:
-      $ref: ./view/card.yaml
+    $ref: ./view/card.yaml
   /cards/{cardId}/:
     $ref: ./view/card.id.yaml
+  /cards/{cardId}/rules:
+    $ref: ./view/card.id.rules.yaml
