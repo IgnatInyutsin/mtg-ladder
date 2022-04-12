@@ -204,7 +204,9 @@ export class CardsComponent implements OnInit {
         name: this.form.name,
         text: this.form.text,
         colors: colors,
-        types: types
+        types: types,
+        mana_value_min: this.form.mana_value_min,
+        mana_value_max: this.form.mana_value_max
       }
   }
 }
