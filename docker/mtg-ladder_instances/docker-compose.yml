@@ -11,20 +11,6 @@ services:
       - /usr/src/app/node_modules
     command: ng serve --host 0.0.0.0 --port 4200
 
-  swagger:
-    image:
-      nginx:alpine
-    restart:
-      always
-    tty:
-      true
-    ports:
-      - "$SWAGGER_PORT:80"
-    networks:
-      - net
-    volumes:
-      - ../../swagger/:/usr/share/nginx/html
-
   pg_db:
     image: 
       postgres:13.1

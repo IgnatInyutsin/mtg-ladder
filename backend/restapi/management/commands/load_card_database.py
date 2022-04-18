@@ -1,9 +1,9 @@
 from django.core.management.base import BaseCommand
 from restapi.app.cards.models import *
+from restapi.app.cards.rules.models import *
 import requests
 import json
 from django.db import transaction
-from types import SimpleNamespace
 from datetime import datetime
 
 class Command(BaseCommand):
