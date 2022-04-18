@@ -1,8 +1,19 @@
-from rest_framework import serializers
 from restapi.app.cards.models import *
+from .docs import *
 
 # Сериализатор для GET
 class CardSerializer(serializers.HyperlinkedModelSerializer):
+    scryfall_id = ScryfallIdField()
+    name = CardNameField()
+    text = CardTextField()
+    colors = ColorsField()
+    types = TypesField()
+    mana_value = ManaValueField()
+    mana_cost = ManaCostField()
+    power = PowerField()
+    toughness = ToughnessField()
+    loyalty = LoyaltyField()
+
     class Meta:
         model = Card
         fields = ['id',

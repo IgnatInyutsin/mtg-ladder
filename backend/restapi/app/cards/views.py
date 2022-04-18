@@ -1,7 +1,9 @@
 from rest_framework import viewsets
 from restapi.app.cards.serializers import CardSerializer
-from  restapi.app.cards.models import Card
+from restapi.app.cards.models import Card
 from django.db.models import Q
+from drf_yasg.utils import swagger_auto_schema
+from .docs import *
 
 #класс для запросов на админа, доступен только get
 class CardsViewSet(viewsets.ReadOnlyModelViewSet):
@@ -40,3 +42,20 @@ class CardsViewSet(viewsets.ReadOnlyModelViewSet):
                 queryset = queryset.filter(types__icontains=types[i])
 
         return queryset
+
+    @swagger_auto_schema(operation_description="Получить список всех карт",
+        tags=["card"],
+        manual_parameters=[
+            name_query_param,
+            text_query_param,
+            mana_value_max_query_param,
+            mana_value_min_query_param,
+            types_query_param,
+            colors_query_param])
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @swagger_auto_schema(operation_description="Получить конкретную карту по ID",
+                         tags=["card"])
+    def retrieve(self, request, pk):
+        return super(CardsViewSet, self).retrieve(request, pk)
