@@ -5,7 +5,7 @@ from restapi.app.cards.rules.views import CardRuleViewSet
 
 #устанавливаем пути
 router = routers.DefaultRouter()
-router.register(r'(?P<cardId>[0-9]+)/rules', CardRuleViewSet)
+router.register(r'(?P<id>[0-9]+)/rules', CardRuleViewSet)
 router.register('', CardsViewSet)
 
 # Wire up our API using automatic URL routing.
