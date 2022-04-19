@@ -13,7 +13,7 @@ class CardRuleViewSet(mixins.ListModelMixin,
     pagination_class = None
 
     def get_queryset(self):
-        cardId = self.kwargs["cardId"]
+        cardId = self.kwargs["id"]
 
         # проверяем на наличие карты
         if not Card.objects.all().filter(id=cardId).exists():
