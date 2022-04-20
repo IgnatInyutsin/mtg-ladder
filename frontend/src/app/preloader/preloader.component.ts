@@ -1,5 +1,5 @@
-import { HostListener, Component, OnInit } from '@angular/core';
-
+import { HostListener, Component, OnInit, Input, Directive, TemplateRef, ViewContainerRef } from '@angular/core';
+import { CardsComponent } from '../cards/cards.component'
 @Component({
   selector: 'app-preloader',
   templateUrl: './preloader.component.html',
@@ -15,9 +15,8 @@ export class PreloaderComponent implements OnInit {
   }
 
   @HostListener('window:load',['$event'])
-  onPageLoad(event: Event) {
+  onPageLoad(event: any) {
     document.body.style.overflow = "auto"
     this.loaded = true;
   }
-
 }

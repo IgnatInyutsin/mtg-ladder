@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { RestApiConnector } from '../../assets/connectors/restapi';
 import {PageResponseObject} from "../../assets/models/page_response";
@@ -11,6 +11,7 @@ import { map, catchError } from "rxjs/operators";
 })
 export class CardsComponent implements OnInit {
 
+  @Output() imageLoaded : boolean = true;
   rest: RestApiConnector = new RestApiConnector();
   cardsPull: PageResponseObject = new PageResponseObject(0, "", "", []);
   actualPage: number = 1;
@@ -57,6 +58,9 @@ export class CardsComponent implements OnInit {
     // проверяем возможность перейти на страницу вперед/назад
     if (data.next != null) this.nextPage = true; else this.nextPage = false;
     if (data.previous != null) this.previousPage = true; else this.previousPage = false;
+
+    // ставим загрузку страниц
+    this.imageLoaded = false;
 
     // сбор данных с scryfall api
     for (let i=0; i<data.results.length; i++) {
