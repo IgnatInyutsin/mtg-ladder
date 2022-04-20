@@ -1,10 +1,11 @@
 <div class="card w-100" style="max-width: 400px; margin-right: 20px; margin-bottom: 20px">
   <div *ngIf="!manyFaces">
-    <img [src]="imgUrl" class="card-img-top" alt="...">
+    <img [src]="imgUrl" class="card-img-top" alt="..." loading="lazy">
   </div>
   <div *ngIf="manyFaces">
-    <img [src]="imgUrl" class="card-img-top w-50" alt="...">
-    <img [src]="secondImgUrl" class="card-img-top w-50" alt="...">
+    <img [src]="imgUrl" class="card-img-top w-100" alt="..." loading="lazy" *ngIf="firstFace">
+    <img [src]="secondImgUrl" class="card-img-top w-100" alt="..." loading="lazy" *ngIf="!firstFace">
+    <button class="btn btn-primary w-100" type="submit" (click)="toggleFace()" style="margin-top: 10px;"> Перевернуть </button>
   </div>
   <div class="card-body">
     <h5 class="card-title">{{name}}</h5>

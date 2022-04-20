@@ -18,10 +18,16 @@ export class CardComponent implements OnInit {
   @Input() secondText: string = '';
   @Input() types: string | string[] = [];
   @Input() manaCost: string | undefined = "";
+  firstFace: boolean = true;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleFace(): void {
+    if (!this.firstFace ) this.firstFace = true
+    else this.firstFace = false
   }
 
 }
