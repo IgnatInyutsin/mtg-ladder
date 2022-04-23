@@ -1,0 +1,5 @@
+#!/bin/bash
+cd ../../docker/mtg-ladder_instances/
+docker-compose exec user_service python manage.py makemigrations restapi
+docker-compose exec user_service python manage.py makemigrations
+docker-compose exec user_service python manage.py migrate

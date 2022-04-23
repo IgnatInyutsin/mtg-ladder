@@ -1,6 +1,8 @@
 from pathlib import Path
 import os
 from datetime import timedelta
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -76,11 +78,11 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASS'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
+        'NAME': os.environ.get('USER_SERVICE_DB_NAME'),
+        'USER': os.environ.get('USER_SERVICE_DB_USER'),
+        'PASSWORD': os.environ.get('USER_SERVICE_DB_PASS'),
+        'HOST': os.environ.get('USER_SERVICE_DB_HOST'),
+        'PORT': 5432,
     }
 }
 
@@ -147,9 +149,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 9
+    )
 }
 
 

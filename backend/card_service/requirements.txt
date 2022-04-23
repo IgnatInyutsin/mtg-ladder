@@ -1,0 +1,9 @@
+Django>=3.0
+djangorestframework
+psycopg2
+tzdata
+django-cors-headers
+django-request-logging
+django-multiselectfield
+requests
+drf_yasg

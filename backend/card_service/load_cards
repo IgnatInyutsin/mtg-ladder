@@ -1,0 +1,3 @@
+#!/bin/bash
+cd ../../docker/mtg-ladder_instances/
+docker-compose exec card_service python manage.py load_card_database

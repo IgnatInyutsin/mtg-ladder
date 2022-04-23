@@ -4,7 +4,6 @@ psycopg2
 tzdata
 django-cors-headers
 django-request-logging
-django-multiselectfield
 requests
 djoser
 djangorestframework_simplejwt

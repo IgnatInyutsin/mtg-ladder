@@ -1,4 +1,4 @@
-from restapi.app.cards.models import *
+from restapi.app.models import *
 from .docs import *
 
 # Сериализатор для GET

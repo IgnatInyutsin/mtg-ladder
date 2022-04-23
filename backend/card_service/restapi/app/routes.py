@@ -1,7 +1,7 @@
 from django.urls import include, path
 from rest_framework import routers
-from restapi.app.cards.views import CardsViewSet
-from restapi.app.cards.rules.views import CardRuleViewSet
+from restapi.app.views import CardsViewSet
+from restapi.app.rules.views import CardRuleViewSet
 
 #устанавливаем пути
 router = routers.DefaultRouter()

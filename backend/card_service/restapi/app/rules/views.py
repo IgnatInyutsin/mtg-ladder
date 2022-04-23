@@ -1,8 +1,8 @@
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets, mixins
-from restapi.app.cards.rules.serializers import CardRuleSerializer
-from restapi.app.cards.rules.models import CardRule
-from restapi.app.cards.models import Card
+from restapi.app.rules.serializers import CardRuleSerializer
+from restapi.app.rules.models import CardRule
+from restapi.app.models import Card
 from django.http import Http404
 
 #класс для запросов на админа, доступен только get

@@ -1,4 +1,4 @@
-from restapi.app.cards.rules.models import CardRule
+from restapi.app.rules.models import CardRule
 from .docs import *
 
 class CardRuleSerializer(serializers.HyperlinkedModelSerializer):

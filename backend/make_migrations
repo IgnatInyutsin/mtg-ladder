@@ -1,5 +1,0 @@
-#!/bin/bash
-cd ../docker/mtg-ladder_instances/
-docker-compose exec backend python manage.py makemigrations restapi
-docker-compose exec backend python manage.py makemigrations
-docker-compose exec backend python manage.py migrate
