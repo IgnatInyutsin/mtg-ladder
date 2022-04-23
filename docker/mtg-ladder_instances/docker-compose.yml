@@ -1,43 +1,73 @@
 version: '3'
 services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "$HTTP_PORT:80"
+      - "$HTTPS_PORT:443"
+    volumes:
+      - ../../routing:/etc/nginx/conf.d
+
   frontend:
     build:
       context: ../../
       dockerfile: ./docker/mtg-ladder_instances/dockerfiles/angular.Dockerfile
-    ports:
-      - "80:4200"
     volumes:
       - ../../frontend:/usr/src/app/
       - /usr/src/app/node_modules
     command: ng serve --host 0.0.0.0 --port 4200
 
-  pg_db:
+  card_service_db:
     image: 
       postgres:13.1
     restart: 
       always
     environment:
-      POSTGRES_PASSWORD: $DB_PASS
-      POSTGRES_USER: $DB_USER
-      POSTGRES_DB: $DB_NAME
+      POSTGRES_PASSWORD: $CARD_SERVICE_DB_PASS
+      POSTGRES_USER: $CARD_SERVICE_DB_USER
+      POSTGRES_DB: $CARD_SERVICE_DB_NAME
     volumes:
       - db:/var/lib/postgresql/data
     ports:
-      - "$DB_PORT:5432"
+      - "$CARD_SERVICE_DB_PORT:5432"
 
-  backend:
+  card_service:
     build:
         context: ../../
-        dockerfile: ./docker/mtg-ladder_instances/dockerfiles/django.Dockerfile
-    command: bash -c "python manage.py runserver 0.0.0.0:8000 && python manage.py makemigrations djangoProject && python manage.py migrate"
+        dockerfile: ./docker/mtg-ladder_instances/dockerfiles/card_service.Dockerfile
+    command: bash -c "python manage.py runserver 0.0.0.0:8000 && python manage.py migrate"
     volumes:
-      - ../../backend/:/usr/src/app/
-    ports:
-      - "$DJANGO_PORT:8000"
+      - ../../backend/card_service/:/usr/src/app/
     env_file:
       - .env
     depends_on:
-      - pg_db
+      - card_service_db
+
+  user_service_db:
+    image:
+      postgres:13.1
+    restart:
+      always
+    environment:
+      POSTGRES_PASSWORD: $USER_SERVICE_DB_PASS
+      POSTGRES_USER: $USER_SERVICE_DB_USER
+      POSTGRES_DB: $USER_SERVICE_DB_NAME
+    volumes:
+      - db:/var/lib/postgresql/data
+    ports:
+      - "$USER_SERVICE_DB_PORT:5432"
+
+  user_service:
+    build:
+      context: ../../
+      dockerfile: ./docker/mtg-ladder_instances/dockerfiles/card_service.Dockerfile
+    command: bash -c "python manage.py runserver 0.0.0.0:8000 && python manage.py migrate"
+    volumes:
+      - ../../backend/user_service/:/usr/src/app/
+    env_file:
+      - .env
+    depends_on:
+      - user_service_db
       
 volumes:
   db:
