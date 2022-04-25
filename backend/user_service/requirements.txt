@@ -1,10 +1,11 @@
-Django>=3.0
+Django<4.0
 djangorestframework
 psycopg2
 tzdata
 django-cors-headers
 django-request-logging
 requests
-djoser
+djoser<1.5
 djangorestframework_simplejwt
 drf_yasg
+django-multiselectfield
