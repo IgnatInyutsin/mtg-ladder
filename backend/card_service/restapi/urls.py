@@ -7,7 +7,7 @@ urlpatterns = []
 urlpatterns += doc_urls
 
 urlpatterns += [
-    path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('', include('restapi.app.routes')),
+    path('api/cards/admin/', admin.site.urls),
+    path('api/cards/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/cards/', include('restapi.app.routes')),
 ]

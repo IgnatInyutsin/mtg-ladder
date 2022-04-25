@@ -1,5 +1,6 @@
 from restapi.app.models import *
 from .docs import *
+from rest_framework import serializers
 
 # Сериализатор для GET
 class CardSerializer(serializers.HyperlinkedModelSerializer):

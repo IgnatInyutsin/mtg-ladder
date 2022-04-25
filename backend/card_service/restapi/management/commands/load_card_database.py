@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
-from restapi.app.cards.models import *
-from restapi.app.cards.rules.models import *
+from restapi.app.models import *
+from restapi.app.rules.models import *
 import requests
 import json
 from django.db import transaction
