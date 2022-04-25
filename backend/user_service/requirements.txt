@@ -5,7 +5,7 @@ tzdata
 django-cors-headers
 django-request-logging
 requests
-djoser<1.5
+djoser>2.0
 djangorestframework_simplejwt
 drf_yasg
 django-multiselectfield
