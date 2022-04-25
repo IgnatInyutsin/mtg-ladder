@@ -22,15 +22,16 @@ services:
 
   card_service_db:
     image: 
-      postgres:13.1
+      postgres:latest
     restart: 
       always
+    command: postgres -c listen_addresses='*'
     environment:
       POSTGRES_PASSWORD: $CARD_SERVICE_DB_PASS
       POSTGRES_USER: $CARD_SERVICE_DB_USER
       POSTGRES_DB: $CARD_SERVICE_DB_NAME
     volumes:
-      - db:/var/lib/postgresql/data
+      - card_service_db:/var/lib/postgresql/data
     ports:
       - "$CARD_SERVICE_DB_PORT:5432"
 
@@ -48,7 +49,8 @@ services:
 
   user_service_db:
     image:
-      postgres:13.1
+      postgres:latest
+    command: postgres -c listen_addresses='*'
     restart:
       always
     environment:
@@ -56,14 +58,14 @@ services:
       POSTGRES_USER: $USER_SERVICE_DB_USER
       POSTGRES_DB: $USER_SERVICE_DB_NAME
     volumes:
-      - db:/var/lib/postgresql/data
+      - user_service_db:/var/lib/postgresql/data
     ports:
       - "$USER_SERVICE_DB_PORT:5432"
 
   user_service:
     build:
       context: ../../
-      dockerfile: ./docker/mtg-ladder_instances/dockerfiles/card_service.Dockerfile
+      dockerfile: ./docker/mtg-ladder_instances/dockerfiles/user_service.Dockerfile
     command: bash -c "python manage.py runserver 0.0.0.0:8000 && python manage.py migrate"
     volumes:
       - ../../backend/user_service/:/usr/src/app/
@@ -73,7 +75,8 @@ services:
       - user_service_db
       
 volumes:
-  db:
+  user_service_db:
+  card_service_db:
 
 networks:
   net:

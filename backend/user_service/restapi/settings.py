@@ -105,12 +105,32 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# настройки почтового сервера
+EMAIL_HOST = os.environ.get('SMTP_HOST')
+EMAIL_PORT = int(os.environ.get('SMTP_PORT'))
+EMAIL_USE_SSL = bool(int(os.environ.get("SMTP_USE_SSL")))
+EMAIL_HOST_USER = os.environ.get('EMAIL')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL')
+
+
 DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    "LOGIN_FIELD": "email",
+    'PASSWORD_RESET_CONFIRM_URL': 'api/auth/users/password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'api/auth/users/username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'api/auth/users/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
-    'SERIALIZERS': {}
+    'SEND_CONFIRMATION_EMAIL': True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
+    'SERIALIZERS': {
+        "user_create": "restapi.app.serializers.RegistrationSerializer",
+        "user": "restapi.app.serializers.UserSerializer",
+        "current_user": "restapi.app.serializers.UserSerializer"
+    },
+    'PERMISSIONS': {
+        'user_list': ['rest_framework.permissions.AllowAny'],
+    }
 }
 
 SIMPLE_JWT = {
@@ -149,7 +169,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20
 }
 
 
@@ -158,7 +180,7 @@ REST_FRAMEWORK = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Samara'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -175,9 +197,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# настройки почтового сервера
-EMAIL_HOST = os.environ.get('SMTP_HOST')
-EMAIL_PORT = int(os.environ.get('SMTP_PORT'))
-EMAIL_USE_SSL = bool(int(os.environ.get("SMTP_USE_SSL")))
-EMAIL_HOST_USER = os.environ.get('EMAIL')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+AUTHENTICATION_BACKENDS = (
+    ('django.contrib.auth.backends.ModelBackend'),
+)
