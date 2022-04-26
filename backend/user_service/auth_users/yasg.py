@@ -17,6 +17,6 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('api/auth/documentation(?P<format>\.json|\.yaml)', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    path('api/auth/documentation/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('api/auth_users/documentation(?P<format>\.json|\.yaml)', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    path('api/auth_users/documentation/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from restapi.app.models import *
+from auth_users.app.models import *
 from django.contrib.auth.models import User
 from email.utils import parseaddr
 
