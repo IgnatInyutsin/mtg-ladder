@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'drf_yasg',
 
-    'restapi',
+    'auth_users',
 ]
 
 MIDDLEWARE = [
@@ -52,9 +52,9 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-ROOT_URLCONF = 'restapi.urls'
+ROOT_URLCONF = 'auth_users.urls'
 
-WSGI_APPLICATION = 'restapi.wsgi.application'
+WSGI_APPLICATION = 'auth_users.wsgi.application'
 
 TEMPLATES = [
     {
@@ -92,16 +92,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth_users.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth_users.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth_users.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth_users.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -116,17 +116,17 @@ DEFAULT_FROM_EMAIL = os.environ.get('EMAIL')
 
 DJOSER = {
     "LOGIN_FIELD": "email",
-    'PASSWORD_RESET_CONFIRM_URL': 'api/auth/users/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': 'api/auth/users/username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': 'api/auth/users/activate/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'api/auth_users/users/password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'api/auth_users/users/username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'api/auth_users/users/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SEND_CONFIRMATION_EMAIL': True,
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
     'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
     'SERIALIZERS': {
-        "user_create": "restapi.app.serializers.RegistrationSerializer",
-        "user": "restapi.app.serializers.UserSerializer",
-        "current_user": "restapi.app.serializers.UserSerializer"
+        "user_create": "auth_users.app.serializers.RegistrationSerializer",
+        "user": "auth_users.app.serializers.UserSerializer",
+        "current_user": "auth_users.app.serializers.UserSerializer"
     },
     'PERMISSIONS': {
         'user_list': ['rest_framework.permissions.AllowAny'],

@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from multiselectfield import MultiSelectField
 
@@ -41,6 +42,7 @@ TYPES = (("Artifact", "Artifact"),
                                          ("instant", "instant"))
 
 class Card(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.TextField()
     mana_value = models.IntegerField(blank=True, null=True)
     mana_cost = models.CharField(max_length=256, blank=True, null=True)

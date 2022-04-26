@@ -2,7 +2,7 @@ from django.apps import AppConfig
 
 
 class AccountsConfig(AppConfig):
-    name = "restapi"
+    name = "auth_users"
     def ready(self):
         # подключаем сигналы
-        import restapi.app.signals
+        import auth_users.app.signals

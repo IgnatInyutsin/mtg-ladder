@@ -7,7 +7,7 @@ from .docs import *
 
 #класс для запросов на админа, доступен только get
 class CardsViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Card.objects.all().order_by('id')
+    queryset = Card.objects.all().order_by("name")
     serializer_class = CardSerializer
 
     def get_queryset(self):

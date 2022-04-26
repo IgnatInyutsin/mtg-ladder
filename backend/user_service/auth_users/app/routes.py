@@ -1,12 +1,10 @@
 from django.urls import include, path
 from rest_framework import routers
-from restapi.app.views import CardsViewSet
-from restapi.app.rules.views import CardRuleViewSet
+from .views import ActivationViewSet
 
 #устанавливаем пути
 router = routers.DefaultRouter()
-router.register(r'(?P<id>[\w.@+-]+)/rules', CardRuleViewSet)
-router.register('', CardsViewSet)
+router.register("activate/(?P<uid>[\w.@+-]+)/(?P<token>[\w.@+-]+)", ActivationViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
